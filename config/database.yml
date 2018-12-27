@@ -76,11 +76,12 @@ test:
 #
 # You can use this database configuration with:
 #
-   production:
-     url: <%= ENV['DATABASE_URL'] %>
+#  production:
+#    url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
-#  <<: *default
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 #  database: interior-design-api_production
 #  username: interior-design-api
 #  password: <%= ENV['INTERIOR-DESIGN-API_DATABASE_PASSWORD'] %>
