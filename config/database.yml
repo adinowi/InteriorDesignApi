@@ -23,8 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: interior-design-api_development
-
+  database: interiordesign
+  username: postgres
+  password: admin
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -37,7 +38,7 @@ development:
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
@@ -75,11 +76,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+   production:
+     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: interior-design-api_production
-  username: interior-design-api
-  password: <%= ENV['INTERIOR-DESIGN-API_DATABASE_PASSWORD'] %>
+#production:
+#  <<: *default
+#  database: interior-design-api_production
+#  username: interior-design-api
+#  password: <%= ENV['INTERIOR-DESIGN-API_DATABASE_PASSWORD'] %>
