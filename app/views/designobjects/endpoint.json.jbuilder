@@ -1,0 +1,1 @@
+json.endpoint 'designobjects/' + @designobject.id.to_s
