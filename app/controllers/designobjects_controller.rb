@@ -24,6 +24,6 @@ class DesignobjectsController < ApplicationController
 			params.require([:name, :category, :image, :sfb])
 			params.permit(:name, :category, :image, :sfb)
 		end
-
+		
 
 end

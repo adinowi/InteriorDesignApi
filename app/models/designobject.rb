@@ -7,7 +7,7 @@ class Designobject < ApplicationRecord
 
     validates :sfb, file_size: { less_than_or_equal_to: 30.megabytes  } 
 
-    validate :correct_sfb_file
+    validate :correct_sfb_file, :correct_category, :correct_name
 
     after_create :set_filename
 
@@ -16,6 +16,18 @@ class Designobject < ApplicationRecord
     def correct_sfb_file
     	if sfb.attached? &&  !(sfb.filename.extension == 'sfb')
     		errors.add(:sfb, 'It must be sfb file')
+    	end
+    end
+
+    def correct_category 
+    	if !['armchair', 'bed', 'couch', 'lamp', 'decoration', 'wardrobe', 'table'].include?(self.category)
+    		errors.add(:category, 'Wrong category')
+    	end
+    end
+
+    def correct_name
+    	if !Designobject.where(:name => self.name).blank?
+    		self.name = self.name + Time.now.to_i.to_s
     	end
     end
 
