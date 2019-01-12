@@ -1,13 +1,16 @@
 class Designobject < ApplicationRecord
 	has_one_attached :image
 	has_one_attached :sfb
+	has_many :designobjects, :class_name => 'Designobject', :foreign_key => 'parent_id'
 
 	validates :image, file_size: { less_than_or_equal_to: 5.megabytes  },
     file_content_type: { allow: /^image\/.*/ , message: 'Only image files'}
 
     validates :sfb, file_size: { less_than_or_equal_to: 30.megabytes  } 
 
-    validate :correct_sfb_file, :correct_category, :correct_name
+    validate :correct_sfb_file, :correct_category
+
+    before_create :correct_name
 
     after_create :set_filename
 
@@ -27,7 +30,9 @@ class Designobject < ApplicationRecord
 
     def correct_name
     	if !Designobject.where(:name => self.name).blank?
-    		self.name = self.name + Time.now.to_i.to_s
+    		if Designobject.where(name: self.name).first.id != self.id
+    			self.name = self.name + Time.now.to_i.to_s
+    		end
     	end
     end
 

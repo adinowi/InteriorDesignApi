@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_170842) do
+ActiveRecord::Schema.define(version: 2019_01_12_135129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,11 @@ ActiveRecord::Schema.define(version: 2018_12_27_170842) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.string "color"
+    t.index ["name"], name: "index_designobjects_on_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "designobjects", "designobjects", column: "parent_id"
 end

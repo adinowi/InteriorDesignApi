@@ -16,6 +16,12 @@ class DesignobjectsController < ApplicationController
     	end
 	end
 
+	def subdesignobjects
+		@designobject = Designobject.find(params[:designobject_id])
+		@designobjects = Designobject.where(parent_id: @designobject.id)
+		render :subobjects
+	end
+
 	private
 		def set_designobject
 			@designobject = Designobject.find(params[:id])
@@ -24,6 +30,6 @@ class DesignobjectsController < ApplicationController
 			params.require([:name, :category, :image, :sfb])
 			params.permit(:name, :category, :image, :sfb)
 		end
-		
+
 
 end
